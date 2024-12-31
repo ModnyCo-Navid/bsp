@@ -1,8 +1,14 @@
 #!/bin/bash
 
-readonly ERROR_REQUIRE_FILE=-3
-readonly ERROR_ILLEGAL_PARAMETERS=-4
-readonly ERROR_REQUIRE_TARGET=-5
+if [[ ! -v ERROR_REQUIRE_FILE ]]; then
+    readonly ERROR_REQUIRE_FILE=-3
+fi
+if [[ ! -v ERROR_ILLEGAL_PARAMETERS ]]; then
+    readonly ERROR_ILLEGAL_PARAMETERS=-4
+fi
+if [[ ! -v ERROR_REQUIRE_TARGET ]]; then
+    readonly ERROR_REQUIRE_TARGET=-5
+fi
 
 idbloader() {
     if [ -e "$SCRIPT_DIR/idbloader-sd_nand.img" ]
@@ -36,7 +42,7 @@ build_spinor() {
         truncate -s 16M /tmp/spi.img
         dd conv=notrunc,fsync if="$(idbloader)" of=/tmp/spi.img bs=512 seek=64
         dd conv=notrunc,fsync if="$SCRIPT_DIR/u-boot.itb" of=/tmp/spi.img bs=512 seek=16384
-    elif [[ -f "$SCRIPT_DIR/uboot.img" ]] && [[ -f "$SCRIPT_DIR/trust.img" ]]
+    elif [[ -f "$SCRIPT_DIR/idbloader-spi.img" ]] && [[ -f "$SCRIPT_DIR/uboot.img" ]] && [[ -f "$SCRIPT_DIR/trust.img" ]]
     then
         echo "Building Rockchip RK33 SPI U-Boot..."
         truncate -s 4M /tmp/spi.img

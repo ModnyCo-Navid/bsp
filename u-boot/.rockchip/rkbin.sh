@@ -6,8 +6,11 @@ custom_source_action() {
             git_am "./0002-Disable-bl32-for-rk3399.rkbin"
             git_am "./0003-Fix-side-effect-of-broken-rkbin-history.rkbin"
             ;;
+        rk3308)
+            git_source "https://github.com/radxa/rkbin.git" 9e048f5694b019794dba077ca4871a009fa9be0f
+            ;;
         *)
-            git_source "https://github.com/radxa/rkbin.git" 8d30737e4e22ab7da4223c4b0647a24553c73c94
+            git_source "https://github.com/radxa/rkbin.git" a45caf5db84fddb3422142a77cf2b50336f11161
             ;;
     esac
 }
